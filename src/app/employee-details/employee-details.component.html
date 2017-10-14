@@ -1,0 +1,60 @@
+<div class="container">
+<h2>Employee Details</h2>
+<form [formGroup]="employeeForm" (ngSubmit)="saveHero()" novalidate>
+
+  <div class="form-group">
+    <label class="center-block">First Name:
+      <input class="form-control" formControlName="firstName" type="text" [readonly]="true">
+    </label>
+    <!-- <div class="err" *ngIf="!employeeForm.controls['firstName'].valid">Please enter first name of the employee.</div> -->
+    
+  </div>
+  <div class="form-group">
+    <label class="center-block">Last Name:
+      <input class="form-control" formControlName="lastName" type="text" [readonly]="true">
+    </label>
+    <!-- <div class="err" *ngIf="!employeeForm.controls['lastName'].valid">Please enter last name of the employee.</div> -->
+  </div>
+  <div class="form-group">
+    <label class="center-block">Role:
+      <select class="form-control" formControlName="role">
+        <option *ngFor="let role of roles" [value]="role" >{{role}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="form-group">
+    <label class="center-block">Position:
+      <select class="form-control" formControlName="position">
+        <option *ngFor="let position of positions" [value]="position">{{position}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="form-group">
+    <label class="center-block">Experience:
+      <input class="form-control" formControlName="experience" type="number">
+    </label>
+    <div class="err" *ngIf="!employeeForm.controls['experience'].valid">Field is required.</div>    
+  </div>
+  <div class="form-group">
+    <label class="center-block">Short Description:
+      <textarea class="form-control" formControlName="shortDescription"></textarea>
+    </label>
+    <div class="err" *ngIf="!employeeForm.controls['shortDescription'].valid">Please enter short description. Text should contain max. 100 characters.</div>
+    
+  </div>
+  <div class="form-group">
+    <label class="center-block">Long description:
+      <textarea class="form-control" formControlName="longDescription"></textarea>
+    </label>
+    <div class="err" *ngIf="!employeeForm.controls['longDescription'].valid">Please enter long description. Text should contain min. 100 characters.</div>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="showError">Data is not valid. Please enter correct data.</div>
+  <div class="alert alert-success" role="alert" *ngIf="showSuccess" >Data is updated - success! Redirecting to employees list...</div>
+  <div class="forms-submit-btns">
+    <button type="submit" [disabled]="employeeForm.pristine" class="btn btn-success btn-block">Save</button>
+    <button type="reset" (click)="revert()" [disabled]="employeeForm.pristine" class="btn btn-danger btn-block">Revert</button>
+    <button type="button" [routerLink]="['/employees']" class="btn btn-primary btn-block">Go to employees list</button>
+  </div>
+</form>
+<p>{{employeeForm.status}}</p>
+</div>
