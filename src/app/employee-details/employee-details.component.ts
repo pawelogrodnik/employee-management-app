@@ -70,9 +70,9 @@ export class EmployeeDetailsComponent implements OnChanges {
     const formData = this.employeeForm.value;
     const currentEmploye = {
       id: this.employeeData.get('id'),
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      position: formData.position,
+      firstName: formData.firstName == undefined ? this.employeeData.get('firstName') : formData.firstName,
+      lastName: formData.lastName == undefined ? this.employeeData.get('lastName') : formData.lastName,
+      position: formData.position == undefined ? this.employeeData.get('position') : formData.position,
       role: formData.role,
       experience: formData.experience,
       shortDescription: formData.shortDescription,
