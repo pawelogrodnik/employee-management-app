@@ -1,17 +1,28 @@
-<div class="custom-table" *ngIf='employees && employees.length'>
-  <div class="row-wrap heading">
-    <div>First & Last Name</div>
-    <div>Role</div>
-    <div>Experience</div>
-    <div class="exit">Remove</div>
+<div class="container">
+
+  <h3>Your current role: <span class="label label-default">{{this.epService.userRole}}</span></h3>
+  <button *ngIf="this.epService.userRole == 'Admin'" class="btn btn-primary" (click)="this.epService.swapRole('User')">Swap to User</button>
+  <button *ngIf="this.epService.userRole == 'User'" class="btn btn-primary" (click)="this.epService.swapRole('Admin')">Swap to Admin</button>
+  
+  
+
+  <div class="custom-table" *ngIf='employees && employees.length'>
+    <div class="row-wrap heading">
+      <div>First & Last Name</div>
+      <div>Role</div>
+      <div>Experience</div>
+      <div class="exit">Remove</div>
+    </div>
+    <div class="row-wrap" *ngFor='let employee of employees, let index=index' (mouseover)='hoveredIndex=index' (click)="editHero(employee)">
+      <div>{{ employee.firstName }} {{ employee.lastName }}</div>
+      <div>{{ employee.role }}</div>
+      <div>{{ employee.experience }} Months</div>
+      <div class="display-on-hover"> Employee short description:
+        <br>{{employee.shortDescription}}</div>
+      <div class="exit" (click)="removeItem(index, employee)">
+        <span class="glyphicon glyphicon-remove"></span>
+      </div>
+    </div>
   </div>
-  <div class="row-wrap" *ngFor='let employee of employees, let index=index' (mouseover)='hoveredIndex=index'  [routerLink]="['/details', employee]">
-    <div>{{ employee.firstName }} {{ employee.lastName }}</div>
-    <div>{{ employee.role }}</div>
-    <div>{{ employee.experience }} Months</div>
-    <div class="display-on-hover" *ngIf="index==hoveredIndex"> Employee short description: <br>{{employee.shortDescription}}</div>
-    <div class="exit" (click)="removeItem(index)">  
-          <span class="glyphicon glyphicon-remove"></span>
-        </div>
-  </div>
+  <div class="alert alert-warning" role="alert" *ngIf="editHeroErr">You have no acces to edit this employee data.</div>
 </div>

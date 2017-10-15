@@ -4,16 +4,17 @@
 
   <div class="form-group">
     <label class="center-block">First Name:
-      <input class="form-control" formControlName="firstName" type="text" [readonly]="true">
+      <input *ngIf="this.epService.userRole == 'User'" class="form-control" formControlName="firstName" type="text" [readonly]="true">
+      <input *ngIf="this.epService.userRole == 'Admin'" class="form-control" formControlName="firstName" type="text">
+      
     </label>
-    <!-- <div class="err" *ngIf="!employeeForm.controls['firstName'].valid">Please enter first name of the employee.</div> -->
     
   </div>
   <div class="form-group">
     <label class="center-block">Last Name:
-      <input class="form-control" formControlName="lastName" type="text" [readonly]="true">
+      <input *ngIf="this.epService.userRole == 'User'" class="form-control" formControlName="lastName" type="text" [readonly]="true">
+      <input *ngIf="this.epService.userRole == 'Admin'" class="form-control" formControlName="lastName" type="text">
     </label>
-    <!-- <div class="err" *ngIf="!employeeForm.controls['lastName'].valid">Please enter last name of the employee.</div> -->
   </div>
   <div class="form-group">
     <label class="center-block">Role:
@@ -24,9 +25,12 @@
   </div>
   <div class="form-group">
     <label class="center-block">Position:
-      <select class="form-control" formControlName="position">
+      <select *ngIf="this.epService.userRole == 'Admin'" class="form-control" formControlName="position">
         <option *ngFor="let position of positions" [value]="position">{{position}}</option>
       </select>
+      <select *ngIf="this.epService.userRole == 'User'" class="form-control" formControlName="position" disabled>
+          <option *ngFor="let position of positions" [value]="position">{{position}}</option>
+        </select>
     </label>
   </div>
   <div class="form-group">
@@ -53,7 +57,7 @@
   <div class="forms-submit-btns">
     <button type="submit" [disabled]="employeeForm.pristine" class="btn btn-success btn-block">Save</button>
     <button type="reset" (click)="revert()" [disabled]="employeeForm.pristine" class="btn btn-danger btn-block">Revert</button>
-    <button type="button" [routerLink]="['/employees']" class="btn btn-primary btn-block">Go to employees list</button>
+    <button type="button" [routerLink]="['/employee']" class="btn btn-primary btn-block">Go to employees list</button>
   </div>
 </form>
 <p>{{employeeForm.status}}</p>

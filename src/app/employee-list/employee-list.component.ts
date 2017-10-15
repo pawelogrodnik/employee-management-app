@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-// import { EmployeeService } from '../employee.service';
 import { Employee, employees } from '../../assets/employee-data';
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
+import { EmployeeService } from '../employee.service';
 
 
 @Component({
@@ -10,17 +10,46 @@ import { Router } from '@angular/router'
   styleUrls: ['./employee-list.component.scss']
 })
 export class EmployeeListComponent {
-  router: Router;
   employees = employees;
   selectedEmployee: Employee;
-
-
-  editHero(employee) {
-    this.router.navigate(['details'])
+  loggedUserRole: string;
+  editHeroErr: boolean = false;
+  constructor(private router: Router, private route: ActivatedRoute, private epService: EmployeeService) {
+    if (this.epService.userRole == undefined) {
+      this.router.navigate(['login']);
+    }
   }
 
-  removeItem(i) {
-    this.employees.splice(i, 1);
+  editHero(employee) {
+    this.editHeroErr = false;
+    if (this.checkPermission(employee)) {
+      this.router.navigate(['details', employee]);
+    } else {
+      this.showError();
+    }
+
+  }
+
+  removeItem(i, employee) {
+    this.editHeroErr = false;
+    if (this.checkPermission(employee)) {
+      this.employees.splice(i, 1);
+    } else {
+      this.showError();
+    }
+  }
+  checkPermission(employee) {
+    if (this.epService.userRole == 'Admin') {
+      return true;
+    } else if (this.epService.userRole == 'User' && (employee.position == 'Admin' || employee.position == 'Manager')) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  showError() {
+    this.editHeroErr = true;
+    setTimeout(() => { this.editHeroErr = false }, 3000)
   }
 
 }

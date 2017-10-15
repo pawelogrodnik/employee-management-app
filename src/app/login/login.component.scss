@@ -1,0 +1,22 @@
+.container {
+    position: relative;
+    height: 100vh;
+    h2 {
+        text-align: center;
+    }
+    .form-wrapper {
+        position: absolute;
+        background-color: #0091cf;
+        color: #fff;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        width: 300px;
+        padding: 20px;
+        border: 1px solid #f7f7f7;
+        border-radius: 4px;
+        input {
+            margin-bottom: 10px;
+        }
+    }
+}

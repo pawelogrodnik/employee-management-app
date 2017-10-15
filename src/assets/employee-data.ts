@@ -14,6 +14,8 @@ export const roles = ['User', 'Admin'];
 export const employees = [
     {
         id: 1,
+        login: "russo",
+        password: "pass",
         firstName: "Russo",
         lastName: "Macias",
         position: "Manager",
@@ -24,6 +26,8 @@ export const employees = [
     },
     {
         id: 2,
+        login: "erna",
+        password: "pass",
         firstName: "Erna",
         lastName: "Hodges",
         position: "Manager",
@@ -34,6 +38,8 @@ export const employees = [
     },
     {
         id: 3,
+        login: "woods",
+        password: "pass",
         firstName: "Woods",
         lastName: "Holt",
         position: "Developer",
@@ -44,6 +50,8 @@ export const employees = [
     },
     {
         id: 4,
+        login: "karina",
+        password: "pass",
         firstName: "Karina",
         lastName: "Mosley",
         position: "Admin",
@@ -54,6 +62,8 @@ export const employees = [
     },
     {
         id: 5,
+        login: "randolph",
+        password: "pass",
         firstName: "Randolph",
         lastName: "Simon",
         position: "Developer",
@@ -64,6 +74,8 @@ export const employees = [
     },
     {
         id: 6,
+        login: "ron",
+        password: "pass",
         firstName: "Ron",
         lastName: "Wesley",
         position: "HR",
@@ -74,6 +86,8 @@ export const employees = [
     },
     {
         id: 7,
+        login: "donald",
+        password: "pass",
         firstName: "Donald",
         lastName: "Trump",
         position: "Developer",
@@ -84,6 +98,8 @@ export const employees = [
     },
     {
         id: 8,
+        login: "rudolph",
+        password: "pass",
         firstName: "Randolph",
         lastName: "Simon",
         position: "Developer",
@@ -94,6 +110,8 @@ export const employees = [
     },
     {
         id: 9,
+        login: "john",
+        password: "pass",
         firstName: "John",
         lastName: "Doe",
         position: "Developer",
@@ -104,6 +122,8 @@ export const employees = [
     },
     {
         id: 10,
+        login: "barack",
+        password: "pass",
         firstName: "Barack",
         lastName: "Obama",
         position: "Developer",

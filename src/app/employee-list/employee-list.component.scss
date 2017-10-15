@@ -1,4 +1,6 @@
 .custom-table {
+    border-bottom:  1px solid #f9f9f9;
+    margin-top: 20px;
     .row-wrap {
         display: flex;
         width: 100%;
@@ -10,43 +12,64 @@
             border-right: 1px solid #f9f9f9;
             width: calc(90% / 3);
             text-align: center;
+            &.display-on-hover {
+                display: none;
+                padding: 5px 10px;
+                position: absolute;
+                // display: block;
+                text-align: left;
+                opacity: .9;
+                left: 20%;
+                transform: translateX(-50%);
+                bottom: 100%;
+                z-index: 2;
+                width: 50%;
+                max-width: 250px;
+                color: #fff;
+                transition: inherit;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 20%;
+                    top: 100%;
+                    width: 0;
+                    height: 0;
+                    border-left: 4px solid transparent;
+                    border-right: 4px solid transparent;
+                    border-top: 5px solid #2d3a4c;
+                }
+                    
+    
+                
+            }
+            &:first-of-type {
+            border-left: 1px solid #f9f9f9;
+            
+            }
+        }
+        &:hover {
+            >div {
+                background-color: #fafafa;
+                &.display-on-hover {
+                    display: block;
+                background-color: #2d3a4c;
+                
+                }
+            }
         }
         .exit {
             width: 10%;
+            span {
+                opacity: .6;
+            }
             &:hover {
                 cursor: pointer;
+                span {
+                    opacity: 1;
+                }
             }
         }
-        .display-on-hover {
-            padding: 5px 10px;
-            position: absolute;
-            display: block;
-            text-align: left;
-            opacity: .9;
-            left: 20%;
-            transform: translateX(-50%);
-            bottom: 100%;
-            z-index: 2;
-            background-color: #2d3a4c;
-            width: 50%;
-            max-width: 250px;
-            color: #fff;
-            transition: inherit;
-            &:before {
-                content: '';
-                position: absolute;
-                left: 20%;
-                top: 100%;
-                width: 0;
-                height: 0;
-                border-left: 4px solid transparent;
-                border-right: 4px solid transparent;
-                border-top: 5px solid #2d3a4c;
-            }
-                
 
-            
-        }
         &.heading {
             >div {
                 background-color: #0091cf;

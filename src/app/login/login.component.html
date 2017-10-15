@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="form-wrapper">
+    <h2>Login:</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <label class="center-block">Login:
+        <input class="form-control" formControlName="user" type="text">
+      </label>
+      <label class="center-block">Password:
+        <input class="form-control" formControlName="pass" type="password">
+      </label>
+      <button type="submit" class="btn btn-success btn-block">Login</button>
+    </form>
+    <div class="alert alert-danger" role="alert" *ngIf="loginFailure">Login/password is incorrect.</div>
+    
+  </div>
+
+</div>
