@@ -18,27 +18,29 @@ export class EmployeeDetailsComponent implements OnChanges {
   employeeData: any;
   showError: boolean = false;
   showSuccess: boolean = false;
+  defaultDataWithValidators: object;
 
   constructor(private fb: FormBuilder, activateRoute: ActivatedRoute, private router: Router, private epService: EmployeeService) {
     this.employeeData = activateRoute.snapshot.paramMap;
     if (this.epService.userRole == undefined) {
       this.router.navigate(['login']);
     }
-    this.createForm();
-  }
-  createForm() {
-    this.employeeForm = this.fb.group({
-      // firstName: [{value: this.employeeData.get('firstName'), disabled: true}, [Validators.required]],
+    this.defaultDataWithValidators = {
       firstName: this.employeeData.get('firstName'),
-      // lastName: [{value: this.employeeData.get('lastName'), disabled: true}, [Validators.required]],
-      lastName:this.employeeData.get('lastName'),
+      lastName: this.employeeData.get('lastName'),
       position: this.employeeData.get('position'),
       role: this.employeeData.get('role'),
       experience: [this.employeeData.get('experience'), [Validators.required]],
       shortDescription: [this.employeeData.get('shortDescription'), [Validators.required, Validators.maxLength(100)]],
       longDescription: [this.employeeData.get('longDescription'), [Validators.required, Validators.minLength(100)]],
-    })
+    }
+    this.createForm();
   }
+
+  createForm() {
+    this.employeeForm = this.fb.group(this.defaultDataWithValidators)
+  }
+
   ngOnChanges() {
     this.employeeForm.reset({
       firstName: this.employeeData.get('firstName'),
@@ -50,6 +52,7 @@ export class EmployeeDetailsComponent implements OnChanges {
       longDescription: this.employeeData.get('longDescription'),
     });
   }
+
   saveHero(): void {
     this.showError = false;
     this.showSuccess = false;
@@ -64,23 +67,21 @@ export class EmployeeDetailsComponent implements OnChanges {
     } else {
       this.showError = true;
     }
-
   }
+
   prepareNewEmployeeData(): Employee {
     const formData = this.employeeForm.value;
     const currentEmploye = {
       id: this.employeeData.get('id'),
-      firstName: formData.firstName == undefined ? this.employeeData.get('firstName') : formData.firstName,
-      lastName: formData.lastName == undefined ? this.employeeData.get('lastName') : formData.lastName,
-      position: formData.position == undefined ? this.employeeData.get('position') : formData.position,
-      role: formData.role,
-      experience: formData.experience,
-      shortDescription: formData.shortDescription,
-      longDescription: formData.longDescription
+      firstName: formData.firstName || this.employeeData.get('firstName'),
+      lastName: formData.lastName || this.employeeData.get('lastName'),
+      position: formData.position || this.employeeData.get('position'),
+      role: formData.role || this.employeeData.get('role'),
+      experience: formData.experience || this.employeeData.get('experience'),
+      shortDescription: formData.shortDescription || this.employeeData.get('shortDescription'),
+      longDescription: formData.longDescription || this.employeeData.get('longDescription')
     }
     return currentEmploye;
-
   }
   revert() { this.ngOnChanges(); }
-
 }

@@ -26,10 +26,10 @@ export class LoginComponent {
       pass: ['', [Validators.required]]
     })
   }
-  auth(loggedData){
-    let authData  = employees.find((user) => {
+  auth(loggedData) {
+    let authData = employees.find((user) => {
       this.userID = user.id;
-      return ((user.login == loggedData.user) && (user.password == loggedData.pass)) 
+      return ((user.login == loggedData.user) && (user.password == loggedData.pass))
     })
     return authData;
   }
@@ -37,9 +37,8 @@ export class LoginComponent {
     const userData = this.loginForm.value;
     if (this.auth(userData)) {
       this.loginFailure = false;
-      // console.log(employees[this.userID - 1]);
-      this.epService.userRole = employees[this.userID-1].role;
-      this.epService.userIndex =this.userID-1;
+      this.epService.userRole = employees[this.userID - 1].role;
+      this.epService.userIndex = this.userID - 1;
       this.router.navigate(['employee', employees[this.userID - 1]]);
     } else {
       this.loginFailure = true;

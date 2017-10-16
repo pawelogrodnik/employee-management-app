@@ -39,13 +39,9 @@ export class EmployeeListComponent {
     }
   }
   checkPermission(employee) {
-    if (this.epService.userRole == 'Admin') {
-      return true;
-    } else if (this.epService.userRole == 'User' && (employee.position == 'Admin' || employee.position == 'Manager')) {
-      return false;
-    } else {
-      return true;
-    }
+    const isAdmin = this.epService.userRole == 'Admin';
+    const employeeIsProtected = employee.position == 'Admin' || employee.position == 'Manager';
+    return isAdmin || !employeeIsProtected;
   }
   showError() {
     this.editHeroErr = true;

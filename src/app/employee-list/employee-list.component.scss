@@ -4,19 +4,19 @@
     .row-wrap {
         display: flex;
         width: 100%;
-        // justify-content: 
         position: relative;
         transition: .3s linear all;
         >div {
             padding: 10px;
             border-right: 1px solid #f9f9f9;
+            opacity: .9;
+            background-color: #fff;
             width: calc(90% / 3);
             text-align: center;
             &.display-on-hover {
                 display: none;
                 padding: 5px 10px;
                 position: absolute;
-                // display: block;
                 text-align: left;
                 opacity: .9;
                 left: 20%;
